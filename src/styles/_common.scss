@@ -1,0 +1,19 @@
+@use "sass:math";
+
+$base-font-size: 16;
+@function rem($pixels) {
+  @return math.div($pixels, $base-font-size) * 1rem;
+}
+
+$default-duration: 0.15s;
+$default-timing-function: ease-out;
+@mixin transition($props...) {
+  transition-property: $props;
+  transition-duration: $default-duration;
+  transition-timing-function: $default-timing-function;
+}
+
+$font-size-large: rem($base-font-size + 8);
+$font-size-normal: rem($base-font-size);
+$font-size-small: rem($base-font-size - 4);
+$font-size-x-small: rem($base-font-size - 8);

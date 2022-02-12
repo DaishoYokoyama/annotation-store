@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Package install
+        run: yarn --frozen-lockfile
+
+      - name: Run lint
+        run: yarn lint
+
+      - name: Run Unit test
+        run: yarn test
+
+      - name: Run Compile (Typescript / Vue)
+        run: yarn compile
