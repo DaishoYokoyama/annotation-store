@@ -24,8 +24,5 @@ jobs:
       - name: Run lint
         run: yarn lint
 
-      - name: Run Unit test
-        run: yarn test
-
       - name: Run Compile (Typescript / Vue)
         run: yarn compile
