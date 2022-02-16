@@ -1,17 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { pageNames } from "@/models";
-
-const HelloWorld = () => import("@/pages/HelloWorld.vue");
+import { PageNames } from "@/models";
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: "/hello-world",
-      name: pageNames.HelloWorld,
-      component: HelloWorld,
+      path: "/login",
+      name: PageNames.Login,
+      component: () => import("@/pages/LoginPage.vue"),
     },
-    { path: "/", redirect: { name: pageNames.HelloWorld } },
+    { path: "/", redirect: { name: PageNames.Login } },
   ],
 });
 

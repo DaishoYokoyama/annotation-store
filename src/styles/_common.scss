@@ -1,11 +1,16 @@
 @use "sass:math";
 
+$bg-color: #2a363f;
+$font-color: #f6f8f7;
+$accent-color: #6ed9a0;
+$border-color: #9ba7a5;
+
 $base-font-size: 16;
 @function rem($pixels) {
   @return math.div($pixels, $base-font-size) * 1rem;
 }
 
-$default-duration: 0.15s;
+$default-duration: 0.2s;
 $default-timing-function: ease-out;
 @mixin transition($props...) {
   transition-property: $props;

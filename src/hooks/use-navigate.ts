@@ -11,10 +11,7 @@ export const useNavigate = () => {
     });
   };
 
-  const navigateToHelloWorld = () => navigateTo(models.pageNames.HelloWorld);
+  const toLogin = () => navigateTo(models.PageNames.Login);
 
-  return {
-    router,
-    navigateToHelloWorld,
-  };
+  return { toLogin };
 };
