@@ -5,21 +5,18 @@ import {
   GithubAuthProvider,
 } from "firebase/auth";
 
+export const LoginProviders = { Github: "github", Google: "google" } as const;
+export type LoginProvider = typeof LoginProviders[keyof typeof LoginProviders];
+
+export const isAuth = () => !!getAuth();
+
 export const googleSignIn = async () => {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
   const result = await signInWithPopup(auth, provider).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.email;
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    console.error(errorCode, errorMessage, email, credential);
+    // TODO Error handle
+    console.error(error);
   });
-
-  if (result) {
-    console.info(result.user.displayName);
-  }
 
   return !!result;
 };
@@ -29,17 +26,15 @@ export const githubSignIn = async () => {
   const provider = new GithubAuthProvider();
 
   const result = await signInWithPopup(auth, provider).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.email;
-    const credential = GithubAuthProvider.credentialFromError(error);
-    console.error(errorCode, errorMessage, email, credential);
+    // TODO Error handle
+    console.error(error);
   });
 
-  if (result) {
-    console.info(result);
-    console.info(result.user.displayName);
-  }
+  return !!result;
+};
 
-  return result;
+export const signOut = () => {
+  const auth = getAuth();
+  if (!auth) return;
+  return auth.signOut();
 };
