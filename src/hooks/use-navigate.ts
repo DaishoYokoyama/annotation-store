@@ -12,6 +12,7 @@ export const useNavigate = () => {
   };
 
   const toLogin = () => navigateTo(models.PageNames.Login);
+  const toDashboard = () => navigateTo(models.PageNames.Dashboard);
 
-  return { toLogin };
+  return { toLogin, toDashboard };
 };

@@ -1,11 +1,13 @@
 <script setup lang="ts">
   import { ref } from "vue";
   import * as auth from "@/auth";
+  import { useNavigate } from "@/hooks/use-navigate";
   import BaseButton from "@/components/BaseButton.vue";
   import GithubIcon from "@/components/svg/GithubIcon.vue";
   import GoogleIcon from "@/components/svg/GoogleIcon.vue";
 
   const progress = ref(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (provider: auth.LoginProvider) => {
     progress.value = true;
@@ -21,6 +23,7 @@
 
     if (loginResult) {
       // TODO Navigate to dashboard page
+      navigate.toDashboard();
       return;
     }
   };
@@ -50,12 +53,12 @@
   .login-page {
     width: 100vw;
     height: 100vh;
+    background: $bg-color;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: rem(40);
-    background: $bg-color;
   }
 
   .mission {
