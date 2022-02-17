@@ -1,29 +1,28 @@
 <script setup lang="ts">
-  import { ref } from "vue";
   import { authService } from "@/firebase";
+  import { useUiStore } from "@/stores/ui";
   import { useNavigate } from "@/hooks/use-navigate";
   import BaseButton from "@/components/BaseButton.vue";
   import GithubIcon from "@/components/svg/GithubIcon.vue";
   import GoogleIcon from "@/components/svg/GoogleIcon.vue";
 
-  const progress = ref(false);
   const navigate = useNavigate();
+  const uiStore = useUiStore();
 
   const handleGithubSignIn = async () => {
-    progress.value = true;
+    uiStore.showProgress();
     const credential = await authService.githubSignIn().finally(() => {
-      progress.value = false;
+      uiStore.hideProgress();
     });
-
     if (credential) {
       navigate.toDashboard();
     }
   };
 
   const handleGoogleSignIn = async () => {
-    progress.value = true;
+    uiStore.showProgress();
     const credential = await authService.googleSignIn().finally(() => {
-      progress.value = false;
+      uiStore.hideProgress();
     });
 
     if (credential) {
