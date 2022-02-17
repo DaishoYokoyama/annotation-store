@@ -14,6 +14,7 @@ export default defineConfig({
         additionalData: `
           @import '@/styles/destyle';
           @import '@/styles/common';
+          @import '@/styles/animation';
         `,
       },
     },

@@ -1,0 +1,33 @@
+.page-fade {
+  &-enter-active {
+    animation: fade 0.25s ease-out;
+  }
+
+  &-leave-active {
+    animation: fade 0.25s ease-out reverse;
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.item-fade {
+  &-enter-active,
+  &-leave-active,
+  &-move {
+    @include transition(all);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+}
