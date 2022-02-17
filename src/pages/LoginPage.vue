@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from "vue";
-  import * as auth from "@/auth";
+  import { authService } from "@/firebase";
   import { useNavigate } from "@/hooks/use-navigate";
   import BaseButton from "@/components/BaseButton.vue";
   import GithubIcon from "@/components/svg/GithubIcon.vue";
@@ -9,22 +9,25 @@
   const progress = ref(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (provider: auth.LoginProvider) => {
+  const handleGithubSignIn = async () => {
     progress.value = true;
-    let loginResult = false;
-    try {
-      if (provider === auth.LoginProviders.Github)
-        loginResult = await auth.githubSignIn();
-      else if (provider === auth.LoginProviders.Google)
-        loginResult = await auth.googleSignIn();
-    } finally {
+    const credential = await authService.githubSignIn().finally(() => {
       progress.value = false;
-    }
+    });
 
-    if (loginResult) {
-      // TODO Navigate to dashboard page
+    if (credential) {
       navigate.toDashboard();
-      return;
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    progress.value = true;
+    const credential = await authService.googleSignIn().finally(() => {
+      progress.value = false;
+    });
+
+    if (credential) {
+      navigate.toDashboard();
     }
   };
 </script>
@@ -37,11 +40,11 @@
       <div class="mission-caption">Project Next Generation Interner</div>
     </div>
     <div class="login-form">
-      <BaseButton @click.stop="handleLogin(auth.LoginProviders.Github)">
+      <BaseButton @click.stop="handleGithubSignIn">
         <GithubIcon class="service-icon" />
         <span>Githubでログイン</span>
       </BaseButton>
-      <BaseButton @click.stop="handleLogin(auth.LoginProviders.Google)">
+      <BaseButton @click.stop="handleGoogleSignIn">
         <GoogleIcon class="service-icon" />
         <span>Googleでログイン</span>
       </BaseButton>
