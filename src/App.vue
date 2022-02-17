@@ -1,14 +1,17 @@
 <script setup lang="ts">
   import { RouterView } from "vue-router";
+  import UiContext from "@/components/UiContext.vue";
 </script>
 
 <template>
   <div id="app">
-    <RouterView v-slot="{ Component }">
-      <Transition name="page-fade" mode="out-in">
-        <component :is="Component" />
-      </Transition>
-    </RouterView>
+    <UiContext>
+      <RouterView v-slot="{ Component }">
+        <Transition name="page-fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
+    </UiContext>
   </div>
 </template>
 

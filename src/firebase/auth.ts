@@ -18,7 +18,6 @@ export class AuthService {
 
   waitForUser(callback: (user: User | null) => void): void {
     onAuthStateChanged(this._auth, (user) => {
-      console.info(user);
       callback(user);
     });
   }
