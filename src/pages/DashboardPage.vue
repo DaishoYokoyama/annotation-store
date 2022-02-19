@@ -1,19 +1,13 @@
 <script setup lang="ts">
-  import { authService } from "@/firebase";
-  import { useNavigate } from "@/hooks/use-navigate";
-
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await authService.signOut();
-    navigate.toLogin();
-  };
+  import PageNavigation from "@/components/PageNavigation.vue";
 </script>
 
 <template>
   <div class="dashboard-page">
-    <h1>Dashboard Page</h1>
-    <button @click.stop="handleLogout">とりあえずログアウトボタン</button>
+    <PageNavigation class="nav" />
+    <div class="contents">
+      <!-- <router-view /> -->
+    </div>
   </div>
 </template>
 
@@ -22,5 +16,16 @@
     width: 100vw;
     height: 100vh;
     background: $bg-color;
+    display: grid;
+    grid-template-columns: auto, 1fr;
+
+    .nav {
+      grid-column: 1;
+    }
+
+    .contents {
+      grid-column: 2;
+      overflow: auto;
+    }
   }
 </style>

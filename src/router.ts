@@ -10,9 +10,10 @@ export const router = createRouter({
       component: () => import("@/pages/LoginPage.vue"),
     },
     {
-      path: "/dashboard",
+      path: "/_",
       name: PageNames.Dashboard,
       component: () => import("@/pages/DashboardPage.vue"),
+      children: [],
     },
     { path: "/", redirect: { name: PageNames.Login } },
   ],
