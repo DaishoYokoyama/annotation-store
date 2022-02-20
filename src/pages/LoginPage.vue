@@ -11,22 +11,25 @@
 
   const handleGithubSignIn = async () => {
     uiStore.showProgress();
+
     const credential = await authService.githubSignIn().finally(() => {
       uiStore.hideProgress();
     });
+
     if (credential) {
-      navigate.toDashboard();
+      navigate.toMyDatasets();
     }
   };
 
   const handleGoogleSignIn = async () => {
     uiStore.showProgress();
+
     const credential = await authService.googleSignIn().finally(() => {
       uiStore.hideProgress();
     });
 
     if (credential) {
-      navigate.toDashboard();
+      navigate.toMyDatasets();
     }
   };
 </script>

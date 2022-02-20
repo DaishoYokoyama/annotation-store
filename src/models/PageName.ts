@@ -1,7 +1,7 @@
 export const PageNames = {
   Login: "Login",
   Dashboard: "Dashboard",
-  MyDataSet: "MyDataSet",
+  MyDatasets: "MyDataset",
   MyTasks: "MyTasks",
 } as const;
 

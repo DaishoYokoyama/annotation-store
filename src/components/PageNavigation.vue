@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { PageNames } from "@/models";
   import { authService } from "@/firebase";
   import { useNavigate } from "@/hooks/use-navigate";
   import LeftArrowIcon from "@/components/svg/LeftArrowIcon.vue";
@@ -17,8 +18,20 @@
     <nav class="navigations">
       <div class="nav-group">
         <h2 class="nav-group-label">マイデータ</h2>
-        <div class="nav-group-item clickable">データセット管理</div>
-        <div class="nav-group-item clickable">タスク管理</div>
+        <router-link
+          :to="{ name: PageNames.MyDatasets }"
+          active-class="is-active"
+          class="nav-group-item clickable"
+        >
+          データセット管理
+        </router-link>
+        <router-link
+          :to="{ name: PageNames.MyTasks }"
+          active-class="is-active"
+          class="nav-group-item clickable"
+        >
+          タスク管理
+        </router-link>
       </div>
       <div class="nav-group">
         <h2 class="nav-group-label">タスクを受託する</h2>
@@ -71,6 +84,10 @@
       align-items: center;
       height: rem(30);
       margin-left: rem(8);
+
+      &.is-active {
+        color: $accent-color;
+      }
     }
   }
 
@@ -94,12 +111,11 @@
   }
 
   .clickable {
-    cursor: pointer;
     color: $font-color;
 
     @include transition(color);
 
-    &:hover {
+    &:hover:not(.is-active) {
       color: $font-color-hover;
     }
   }

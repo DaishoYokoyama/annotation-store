@@ -6,7 +6,9 @@
   <div class="dashboard-page">
     <PageNavigation class="nav" />
     <div class="contents">
-      <!-- <router-view /> -->
+      <Transition name="item-fade" mode="out-in">
+        <router-view />
+      </Transition>
     </div>
   </div>
 </template>
@@ -17,7 +19,7 @@
     height: 100vh;
     background: $bg-color;
     display: grid;
-    grid-template-columns: auto, 1fr;
+    grid-template-columns: auto 1fr;
 
     .nav {
       grid-column: 1;

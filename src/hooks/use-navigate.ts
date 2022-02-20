@@ -13,6 +13,8 @@ export const useNavigate = () => {
 
   const toLogin = () => navigateTo(models.PageNames.Login);
   const toDashboard = () => navigateTo(models.PageNames.Dashboard);
+  const toMyDatasets = () => navigateTo(models.PageNames.MyDatasets);
+  const toMyTasks = () => navigateTo(models.PageNames.MyTasks);
 
-  return { toLogin, toDashboard };
+  return { toLogin, toDashboard, toMyDatasets, toMyTasks };
 };
