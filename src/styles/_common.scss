@@ -2,8 +2,9 @@
 
 $bg-color: #2a363f;
 $font-color: #f6f8f7;
+$font-color-hover: darken($font-color, 30%);
 $accent-color: #6ed9a0;
-$border-color: #9ba7a5;
+$border-color: #66716f;
 
 $base-font-size: 16;
 @function rem($pixels) {
