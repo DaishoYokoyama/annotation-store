@@ -1,14 +1,37 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { authService } from "@/firebase";
+  import { useNavigate } from "@/hooks/use-navigate";
+  import LeftArrowIcon from "@/components/svg/LeftArrowIcon.vue";
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await authService.signOut();
+    navigate.toLogin();
+  };
+</script>
 
 <template>
-  <nav class="page-navigation">
+  <div class="page-navigation">
     <h1 class="caption">Project NGI</h1>
-    <div class="nav-group">
-      <h2 class="nav-group-label">マイデータ</h2>
-      <div class="nav-group-item">データセット</div>
-      <div class="nav-group-item">タスク</div>
+    <nav class="navigations">
+      <div class="nav-group">
+        <h2 class="nav-group-label">マイデータ</h2>
+        <div class="nav-group-item clickable">データセット管理</div>
+        <div class="nav-group-item clickable">タスク管理</div>
+      </div>
+      <div class="nav-group">
+        <h2 class="nav-group-label">タスクを受託する</h2>
+        <div class="nav-group-item clickable">タスクを探す</div>
+      </div>
+    </nav>
+    <div class="footer">
+      <button class="sign-out clickable" @click.stop="handleLogout">
+        <LeftArrowIcon class="nav-icon" />
+        <span>ログアウト</span>
+      </button>
     </div>
-  </nav>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -16,6 +39,8 @@
     width: rem(180);
     padding: 0 rem(20);
     border-right: 1px solid $border-color;
+    display: flex;
+    flex-direction: column;
   }
 
   .caption {
@@ -23,10 +48,17 @@
     margin: rem(40) 0;
   }
 
+  .navigations {
+    display: flex;
+    flex-direction: column;
+    gap: rem(24);
+  }
+
   .nav-group {
     display: flex;
     flex-direction: column;
     gap: rem(8);
+
     &-label {
       font-size: $font-size-small;
       font-weight: bold;
@@ -39,6 +71,36 @@
       align-items: center;
       height: rem(30);
       margin-left: rem(8);
+    }
+  }
+
+  .footer {
+    margin-top: auto;
+  }
+
+  .sign-out {
+    padding: rem(16) 0;
+    color: $font-color;
+    font-size: $font-size-small;
+    display: flex;
+    align-items: center;
+    gap: $font-size-small;
+  }
+
+  .nav-icon {
+    width: $font-size-small;
+    height: $font-size-small;
+    fill: currentColor;
+  }
+
+  .clickable {
+    cursor: pointer;
+    color: $font-color;
+
+    @include transition(color);
+
+    &:hover {
+      color: $font-color-hover;
     }
   }
 </style>
